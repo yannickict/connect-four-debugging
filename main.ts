@@ -8,7 +8,21 @@ board.output();
 while (true) {
   const input = prompt(`Player ${player}:`) || "";
   const col = Number.parseInt(input);
+  
+  // Überprüfe ob die Eingabe gültig ist
+  if (Number.isNaN(col) || col < 0 || col > 6) {
+    console.log("Invalid input! Please enter a number between 0 and 6.");
+    continue;
+  }
+  
   const row = board.makeMove(player, col);
+  
+  // Überprüfe ob der Stein platziert wurde
+  if (row === -1) {
+    console.log("Column is full! Please choose another column.");
+    continue;
+  }
+  
   board.output();
   console.log();
   const winner = board.winner(player, row, col);

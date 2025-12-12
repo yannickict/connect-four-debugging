@@ -109,12 +109,16 @@ export class Board {
     // Woe to thee, who entered here, for you dug too deep and unearthed daemons of the otherworld!
     const rising: Array<string> = [];
     const falling: Array<string> = [];
+    
+    // Rising diagonal: von links-unten nach rechts-oben
     for (let i = r, j = c; i >= 0 && j < this.fields[0].length; i--, j++) {
       rising.push(this.fields[i][j]);
     }
     for (let i = r, j = c; i < this.fields.length && j >= 0; i++, j--) {
       rising.push(this.fields[i][j]);
     }
+    
+    // Falling diagonal: von links-oben nach rechts-unten
     for (
       let i = r, j = c;
       i < this.fields.length && j < this.fields[0].length;
@@ -123,7 +127,7 @@ export class Board {
       falling.push(this.fields[i][j]);
     }
     for (let i = r, j = c; i >= 0 && j >= 0; i--, j--) {
-      falling.push(this.fields[i][i]);
+      falling.push(this.fields[i][j]);
     }
     return [rising.join(""), falling.join("")];
   }
